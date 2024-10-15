@@ -23,25 +23,42 @@ const HomePage = () => {
 
   useEffect(() => {
     const checkTime = () => {
-      const currentHour = new Date().getHours();
-
-      // Check if current time is before 8 PM (20:00)
-      if (currentHour < 20) {
-        setSaleMessage('Sale ends at 8 PM today!');
+      const currDate = new Date();
+      
+      // Extract day, month, and year to format the date
+      const day = String(currDate.getDate()).padStart(2, '0');
+      const month = String(currDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based, so add 1
+      const year = String(currDate.getFullYear()).slice(-2); // Get last 2 digits of the year
+  
+      // Format as 15-10-24
+      const formattedDate = `${day}-${month}-${year}`;
+      
+  
+      
+      const currentHour = currDate.getHours();
+      const currentMinute = currDate.getMinutes();
+  
+      // Create a variable for the specific date you want to check against
+      const saleEndDate = '16-10-24';
+  
+      // Adjusted condition: If today is the sale end date and it's before 10 PM (22:00)
+      if (formattedDate === saleEndDate && (currentHour < 23)) {
+        setSaleMessage('Sale ends at 10 PM today!');
       } else {
         setSaleMessage('The sale has ended. Check back for new offers!');
       }
     };
-
+  
     // Call the function when component mounts
     checkTime();
-
+  
     // Optional: Set interval to check every minute if you want real-time updates
     const interval = setInterval(checkTime, 60000);
-
+  
     // Clean up interval on component unmount
     return () => clearInterval(interval);
   }, []);
+  
 
   return (
     <div className="home-page">
@@ -80,7 +97,7 @@ const HomePage = () => {
               <img className="carousel-img" src={item.image} alt={`Slide ${item.id}`} />
               <Carousel.Caption>
                 <h3>{item.caption}</h3>
-                <p>Sale ends at 8 PM today!</p> {/* Dynamic message */}
+                <p>{saleMessage}</p> {/* Dynamic message */}
               </Carousel.Caption>
             </Carousel.Item>
           ))}
