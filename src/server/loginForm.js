@@ -5,9 +5,11 @@ const cors = require('cors');
 require('dotenv').config();
 const { MongoConnection, getDb } = require('../connection/mongo'); // Ensure this path is correct
 const mongoose = require('mongoose'); // Ensure mongoose is imported
-
+const jwt = require('jsonwebtoken');
 const app = express();
 const port = process.env.PORT || 5001;
+
+const jwtKey = 'E-cOmm';
 
 // Middleware
 app.use(bodyParser.json());
@@ -37,24 +39,55 @@ MongoConnection()
     });
 
     // POST route for user login
-    app.post('/api/login', async (req, res) => {
-      const { email, password } = req?.body;
 
+    // app.post('/api/login', async (req, res) => {
+    //   const { email, password } = req?.body;
+
+    //   try {
+    //     const user = await getDb().collection('userData').findOne({ email });
+    //     if (!user) {
+    //       return res.status(401).json({ message: 'Invalid email or password' });
+    //     }
+    //     if (user.password !== password) {
+    //       return res.status(401).json({ message: 'Invalid email or password' });
+    //     }
+
+    //     res.status(200).json({ message: 'Login successful' });
+    //   } catch (error) {
+    //     console.error('Error during login:', error);
+    //     res.status(500).json({ message: 'Internal Server Error' });
+    //   }
+    // });
+
+    app.post("/api/login", async (req, res) => {
+      const { email, password } = req.body;
+    
       try {
-        const user = await getDb().collection('userData').findOne({ email });
+        const user = await getDb().collection("userData").findOne({ email });
         if (!user) {
-          return res.status(401).json({ message: 'Invalid email or password' });
+          return res.status(401).json({ message: "Invalid email or password" });
         }
         if (user.password !== password) {
-          return res.status(401).json({ message: 'Invalid email or password' });
+          return res.status(401).json({ message: "Invalid email or password" });
         }
-
-        res.status(200).json({ message: 'Login successful' });
+    
+        // Generate JWT token
+        jwt.sign({ user }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+          if (err) {
+            console.error("Error generating token:", err);
+            return res.status(500).json({ message: "Internal Server Error" });
+          }
+    
+          // Send success response with token
+          return res.status(200).json({ message: "Login successful", token });
+        });
+    
       } catch (error) {
-        console.error('Error during login:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        console.error("Error during login:", error);
+        res.status(500).json({ message: "Internal Server Error" });
       }
     });
+    
 
     // Start the server after successful MongoDB connection
     app.listen(port, () => {

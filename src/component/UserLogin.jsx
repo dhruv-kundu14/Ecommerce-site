@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import { useNavigate } from 'react-router-dom';
 
 const UserLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +21,8 @@ const UserLogin = () => {
 
       if (response.ok) {
         console.log(data.message); // Login successful
+        // Store token in localStorage
+        localStorage.setItem('jwtToken', data.token);
         navigate('/'); // Redirect to a protected route
       } else {
         alert(data.message); // Show error message
@@ -33,7 +35,7 @@ const UserLogin = () => {
 
   const handleRegisterClick = (e) => {
     e.preventDefault();
-    navigate('/register'); 
+    navigate('/register');
   };
 
   return (
@@ -76,6 +78,7 @@ const UserLogin = () => {
 };
 
 export default UserLogin;
+
 
 
 // import React, { useState } from 'react';
