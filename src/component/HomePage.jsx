@@ -39,11 +39,11 @@ const HomePage = () => {
       const currentMinute = currDate.getMinutes();
   
       // Create a variable for the specific date you want to check against
-      const saleEndDate = '16-10-24';
+      const saleEndDate = '17-10-24';
   
       // Adjusted condition: If today is the sale end date and it's before 10 PM (22:00)
-      if (formattedDate === saleEndDate && (currentHour < 23)) {
-        setSaleMessage('Sale ends at 10 PM today!');
+      if (formattedDate == saleEndDate && (currentHour < 23)) {
+        setSaleMessage('Sale ends at 12 PM today!');
       } else {
         setSaleMessage('The sale has ended. Check back for new offers!');
       }
