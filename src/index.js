@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import App from './App'; // Adjust according to your file structure
+import { AuthProvider } from './server/AuthContext'; // Adjust the path accordingly
 
 const theme = createTheme({
     palette: {
@@ -19,8 +20,26 @@ const theme = createTheme({
 });
 
 ReactDOM.render(
+    <AuthProvider>
     <ThemeProvider theme={theme}>
         <App />
-    </ThemeProvider>,
+    </ThemeProvider>
+    </AuthProvider>,
     document.getElementById('root')
 );
+
+// // App.js or index.js
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import { BrowserRouter } from 'react-router-dom';
+// import App from './App';
+
+// ReactDOM.render(
+  
+//     <BrowserRouter>
+//       <App />
+//     </BrowserRouter>
+ 
+//   document.getElementById('root')
+// );
+

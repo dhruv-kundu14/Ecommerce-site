@@ -5,18 +5,20 @@ import Carousel from 'react-bootstrap/Carousel';
 
 const HomePage = () => {
   const products = [
-    { id: 1, name: "Bagpack", price: "₹ 9500", image: "/NIKE Diamond Select Bat Pack - Black.jpeg" },
-    { id: 2, name: "Adidas Light", price: "₹ 12565", image: "/NIKE Diamond Select Bat Pack - Black.jpeg" },
-    { id: 3, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/NIKE Diamond Select Bat Pack - Black.jpeg" },
-    { id: 4, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/NIKE Diamond Select Bat Pack - Black.jpeg" },
-    { id: 5, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/NIKE Diamond Select Bat Pack - Black.jpeg" },
-    { id: 6, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/NIKE Diamond Select Bat Pack - Black.jpeg" },
+    { id: 1, name: "Bagpack", price: "₹ 9500", image: "/icons/product1.jpg" },
+    { id: 2, name: "Adidas Light", price: "₹ 12565", image: "/icons/product2.jpg" },
+    { id: 3, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/icons/product3.jpg" },
+    { id: 4, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/icons/product4.jpg" },
+    { id: 5, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/icons/product5.jpg" },
+    { id: 6, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/icons/product6.jpg" },
+    { id: 7, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/icons/product7.jpg" },
+    { id: 8, name: "Cartoon Astronaut T-Shirt", price: "₹ 12565", image: "/icons/product8.jpg" },
   ];
 
   const carouselItems = [
-    { id: 1, image: "/carasoule/1969 Ford Mustang Boss 429 Continuation Car Debuts at SEMA.jpeg", caption: "Limited Time Offer" },
-    { id: 2, image: "/carasoule/download(3).jpeg", caption: "Best Sellers" },
-    { id: 3, image: "/carasoule/download(4).jpeg", caption: "New Arrivals" },
+    { id: 1, image: "/icons/banner/b1.jpg", caption: "Limited Time Offer" },
+    { id: 2, image: "/icons/banner/b16.jpg", caption: "Best Sellers" },
+    { id: 3, image: "/icons/banner/b20.jpg", caption: "New Arrivals" },
   ];
 
   const [saleMessage, setSaleMessage] = useState('');

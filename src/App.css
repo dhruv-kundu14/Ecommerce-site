@@ -245,10 +245,14 @@ body, html {
 
 .hero h3 {
   font-size: 4vw;
+  margin-left: 85px;
+  color: #322f2f
 }
 
 .hero p {
   font-size: 2vw;
+  /* margin-right: 343px; */
+  color: #5c5050;
 }
 
 @media (max-width: 768px) {
@@ -330,6 +334,7 @@ body, html {
   object-fit: cover; /* Ensures image covers the area without distortion */
   margin-bottom: 15px;
   border-radius: 5px; /* Optional: adds rounded corners to images */
+  object-fit: contain;
 }
 
 .product-detail {
@@ -660,7 +665,7 @@ p a:hover {
 
 /* Default Styles for Carousel Images */
 .carousel .carousel-img {
-  height: 480px; /* Fixed height */
+  height: 380px; /* Fixed height */
   object-fit: cover; /* Ensures the image covers the container, cropping if needed */
   width: 100%; /* Make width 100% to fit the container */
   border-radius: 20px; /* Ensures image matches container's rounded corners */
