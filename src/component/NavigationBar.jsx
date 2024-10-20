@@ -194,10 +194,10 @@ import { useAuth } from '../server/AuthContext'; // Import useAuth
 
 const pages = [
   { name: 'Home', link: '/' },
-  { name: 'Products', link: '/products' },
+  { name: 'Product Listing', link: '/products' },
   { name: 'Pricing', link: '/pricing' },
-  { name: 'User', link: '/user' },
-  { name: 'ProductListing', link: '/productlisting' }
+  // { name: 'User', link: '/user' },
+  { name: 'Products', link: '/productlisting' }
 ];
 const guestPages = [{ name: 'Home', link: '/' }];
 const settingsLoggedIn = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -227,9 +227,10 @@ function ResponsiveAppBar() {
   };
 
   const handleLogout = () => {
-    logout();
-    navigate('/user'); // Redirect to login page after logging out
+    logout(); // Update the authentication context
+    navigate('/'); // Redirect to login page after logging out
   };
+  
 
   const handleUserMenuClick = (setting) => {
     if (setting === 'Logout') {

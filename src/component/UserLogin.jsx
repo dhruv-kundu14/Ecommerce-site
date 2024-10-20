@@ -79,7 +79,7 @@
 
 // export default UserLogin;
 
-
+// *******************************************************
 
 // UserLogin.jsx
 import React, { useState } from 'react';
@@ -92,6 +92,34 @@ const UserLogin = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch('http://localhost:5001/api/login', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ email, password }),
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (response.ok) {
+  //       console.log(data.message); // Login successful
+  //       // Store token in localStorage
+  //       localStorage.setItem('jwtToken', data.token);
+  //       login(); // Update the authentication state
+  //       navigate('/'); // Redirect to a protected route
+  //     } else {
+  //       alert(data.message); // Show error message
+  //     }
+  //   } catch (error) {
+  //     console.error('Error logging in:', error);
+  //     alert('Error logging in. Please try again.');
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -102,14 +130,14 @@ const UserLogin = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         console.log(data.message); // Login successful
-        // Store token in localStorage
+        // Store token in localStorage and update authentication state
         localStorage.setItem('jwtToken', data.token);
-        login(); // Update the authentication state
+        login(data.token); // Pass token to login function
         navigate('/'); // Redirect to a protected route
       } else {
         alert(data.message); // Show error message
@@ -119,7 +147,7 @@ const UserLogin = () => {
       alert('Error logging in. Please try again.');
     }
   };
-
+  
   const handleRegisterClick = (e) => {
     e.preventDefault();
     navigate('/register');

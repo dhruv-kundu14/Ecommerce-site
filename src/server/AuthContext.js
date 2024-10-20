@@ -31,16 +31,25 @@
 
 // export const useAuth = () => useContext(AuthContext);
 
-// AuthContext.js
 import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Check localStorage for existing token to initialize authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('jwtToken') !== null; // Initialize state based on token presence
+  });
 
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
+  const login = (token) => {
+    localStorage.setItem('jwtToken', token); // Store token in localStorage
+    setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('jwtToken'); // Remove token from localStorage
+    setIsAuthenticated(false);
+  };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
@@ -52,3 +61,4 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
+

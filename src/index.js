@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import App from './App'; // Adjust according to your file structure
 import { AuthProvider } from './server/AuthContext'; // Adjust the path accordingly
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
+
 
 const theme = createTheme({
     palette: {
