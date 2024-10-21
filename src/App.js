@@ -9,7 +9,10 @@ import Register from './component/RegisterPage.jsx';
 import TemporaryDrawer from './component/Products.jsx';
 import Pricing from './component/Pricing.jsx';
 import ProductList from './component/ProductList.jsx';
-import ShoppingCart from './component/ShoppingCart.jsx';
+// import ShoppingCart from './component/ShoppingCart.jsx';
+import Account from './component/Account.jsx';
+import Dashboard from './component/Dashboard.jsx';
+import UserProfile from './component/UserProfile.jsx';
 
 const Home = () => <HomePage />;
 const Product = () => {
@@ -25,6 +28,13 @@ const User = () => <UserLogin />;
 const PricingPage = () => <Pricing />;
 const Registeration = () => <Register />;
 const ProductListing = ({ addToCart }) => <ProductList addToCart={addToCart} />;
+
+
+const UserProfilePage = () => <UserProfile />;
+const DashboardPage = () => <Dashboard />;
+const AccountPage = () => <Account />;
+
+
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -61,6 +71,9 @@ const App = () => {
           <Route path="/user" element={<User />} />
           <Route path="/register" element={<Registeration />} />
           <Route path="/productlisting" element={<ProductListing addToCart={addToCart} />} />
+          <Route path="/Account" element={<AccountPage />} />
+          <Route path="/Dashboard" element={<DashboardPage />} />
+          <Route path="/UserProfile" element={<UserProfilePage />} />
         </Routes>
 
       </div>
