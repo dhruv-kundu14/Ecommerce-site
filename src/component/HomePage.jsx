@@ -65,6 +65,40 @@ const HomePage = () => {
     { id: 3, image: "/icons/banner/b20.jpg", caption: "New Arrivals" },
   ];
 
+  const reviews = [
+    {
+      id: 1,
+      name: "John Doe",
+      rating: 4,
+      review: "Great product! Highly recommend it. The quality is top-notch.",
+      icon: <img src="/icons/people/1.png" alt="John Doe" className="review-icon" />
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      rating: 5,
+      review: "Absolutely love it! Fast delivery and excellent customer service.",
+      icon: <img src="/icons/people/3.png" alt="Jane Smith" className="review-icon" />
+    },
+    {
+      id: 3,
+      name: "Michael Johnson",
+      rating: 3,
+      review: "Decent product, but could be improved. Overall, it's okay.",
+      icon: <img src="/icons/people/2.png" alt="Michael Johnson" className="review-icon" />
+    },
+  ];
+
+  const renderStars = (rating) => {
+  return Array.from({ length: 5 }, (_, index) => (
+    <MDBIcon
+      key={index}
+      icon={index < rating ? "star" : "star-half-alt"}
+      className={`text-warning ${index >= rating ? "text-muted" : ""}`}
+    />
+  ));
+};
+
   const [saleMessage, setSaleMessage] = useState("");
 
   useEffect(() => {
@@ -150,6 +184,24 @@ const HomePage = () => {
           ))}
         </Carousel>
       </div>
+
+      <div className="customer-reviews">
+        <h3>Customer Reviews</h3>
+        <div className="reviews">
+          {reviews.map((review) => (
+            <div key={review.id} className="review-card">
+              <div className="review-header">
+                {review.icon}
+                <div className="review-info">
+                  <h4>{review.name}</h4>
+                  <div className="stars">{renderStars(review.rating)}</div>
+                </div>
+              </div>
+              <p>{review.review}</p>
+            </div>
+          ))}
+        </div>
+        </div>
 
       {/* Footer */}
  
