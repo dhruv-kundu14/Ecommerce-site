@@ -12,7 +12,7 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 
-const HomePage = () => {
+const HomePage = ({ addToCart }) => {
   const products = [
     { id: 1, name: "Bagpack", price: "₹ 9500", image: "/icons/product1.jpg" },
     {
@@ -100,6 +100,13 @@ const HomePage = () => {
 };
 
   const [saleMessage, setSaleMessage] = useState("");
+  const [clicked, setClicked] = useState(null);
+
+  const handleAddToCart = (product) => {
+    setClicked(product.id);
+    addToCart(product);
+    setTimeout(() => setClicked(null), 1000);
+  };
 
   useEffect(() => {
     const checkTime = () => {
@@ -154,13 +161,25 @@ const HomePage = () => {
         <h3>Featured Products</h3>
         <div className="products">
           {products.map((product) => (
-            <div key={product.id} className="product">
-              <img src={product.image} alt={product.name} />
-              <h4>{product.name}</h4>
-              <p>{product.price}</p>
-              <button>
-                <ShoppingBagIcon />
-              </button>
+            <div key={product.id} className="product-item">
+              <div className="product-image">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  onError={(e) => (e.target.src = "/placeholder.jpg")}
+                />
+              </div>
+              <div className="product-details">
+                <h4>{product.name}</h4>
+                <p>Price: {product.price}</p>
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  disabled={clicked === product.id}
+                >
+                  <ShoppingBagIcon />
+                  {clicked === product.id ? "Adding..." : "Add to Cart"}
+                </button>
+              </div>
             </div>
           ))}
         </div>

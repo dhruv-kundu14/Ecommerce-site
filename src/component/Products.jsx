@@ -1,62 +1,76 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import PropTypes from 'prop-types';
 
-export default function TemporaryDrawer() {
-  const [open, setOpen] = React.useState(false);
+const ProductList = ({ addToCart }) => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [clicked, setClicked] = useState(null);
 
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5002/getProducts');
+        setProducts(response.data);
+      } catch (error) {
+        setError('Failed to load products. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const handleAddToCart = (product) => {
+    setClicked(product._id);
+    addToCart(product);
+    setTimeout(() => setClicked(null), 1000);
   };
 
-  const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  if (loading) return <div className="spinner"></div>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <Button onClick={toggleDrawer(true)}>
-        <MoreVertIcon />
-      </Button>
-      <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
+    <div className="product-list">
+      <h3>Featured Products</h3>
+      <div className="products">
+        {products.length === 0 ? (
+          <p>No products available.</p>
+        ) : (
+          products.map((product) => (
+            <div key={product._id.$oid} className="product-item">
+              <div className="product-image">
+                <img
+                  src={product.images || 'placeholder.jpg'}
+                  alt={product.name}
+                  onError={(e) => (e.target.src = 'placeholder.jpg')}
+                />
+              </div>
+              <div className="product-details">
+                <h4>{product.name}</h4>
+                <p>
+                  Price: {product.price} {product.currency}
+                </p>
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  disabled={clicked === product._id}
+                >
+                  <ShoppingBagIcon />
+                  {clicked === product._id ? 'Adding...' : 'Add to Cart'}
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
-}
+};
+
+ProductList.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
+
+export default ProductList;
