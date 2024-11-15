@@ -3,34 +3,59 @@ import axios from 'axios';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import PropTypes from 'prop-types';
 
-const ProductList = ({ addToCart }) => {
+const ProductList = ({ addToCart, filters }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [clicked, setClicked] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchFilteredProducts = async () => {
+      setLoading(true);
+      setError(null); // Reset error state on filter change
+    
       try {
-        const response = await axios.get('http://localhost:5002/getProducts');
-        setProducts(response.data);
+        // Dynamically build the query string using the filters prop
+        const queryString = new URLSearchParams(
+          Object.entries(filters).reduce((acc, [key, value]) => {
+            if (value) {
+              acc[key] = Array.isArray(value) ? value.join(',') : value;
+            }
+            return acc;
+          }, {})
+        ).toString();
+    
+        console.log('Query String:', queryString);
+    
+        const endpoint = queryString
+          ? `http://localhost:5003/api/products?${queryString}`
+          : 'http://localhost:5002/getProducts'; // Fallback endpoint if no filters
+    
+        const response = await axios.get(endpoint);
+    
+        // Ensure response is an array
+        console.log('API Response:', response.data);
+        setProducts(Array.isArray(response.data) ? response.data : response.data.products || []);
       } catch (error) {
-        setError('Failed to load products. Please try again later.');
+        console.error('Error fetching products:', error);
+        setError('Failed to load products. Please try again.');
       } finally {
         setLoading(false);
       }
     };
-    fetchProducts();
-  }, []);
+    
+
+    fetchFilteredProducts();
+  }, [filters]); // Re-fetch products whenever filters change
+
+  if (loading) return <div className="spinner"></div>;
+  if (error) return <p>{error}</p>;
 
   const handleAddToCart = (product) => {
     setClicked(product._id);
     addToCart(product);
     setTimeout(() => setClicked(null), 1000);
   };
-
-  if (loading) return <div className="spinner"></div>;
-  if (error) return <p>{error}</p>;
 
   return (
     <div className="product-list">
@@ -40,7 +65,7 @@ const ProductList = ({ addToCart }) => {
           <p>No products available.</p>
         ) : (
           products.map((product) => (
-            <div key={product._id.$oid} className="product-item">
+            <div key={product._id} className="product-item">
               <div className="product-image">
                 <img
                   src={product.images || 'placeholder.jpg'}
@@ -71,6 +96,7 @@ const ProductList = ({ addToCart }) => {
 
 ProductList.propTypes = {
   addToCart: PropTypes.func.isRequired,
+  filters: PropTypes.object.isRequired,
 };
 
 export default ProductList;

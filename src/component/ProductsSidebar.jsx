@@ -1,37 +1,53 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import Slider from "@mui/material/Slider";
 import Grid from "@mui/material/Grid";
 
-export default function TemporaryDrawer({ onPriceChange }) {
+export default function TemporaryDrawer({ onFilterChange }) {
   const [open, setOpen] = React.useState(false);
   const [priceRange, setPriceRange] = React.useState([100, 5000]);
   const [selectedSize, setSelectedSize] = React.useState(null);
-  const [ setSelectedColor] = React.useState(null);
+  const [selectedColor, setSelectedColor] = React.useState(null);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+    console.log(`Drawer is now ${newOpen ? "open" : "closed"}`);
   };
 
   const handlePriceChange = (event, newValue) => {
     setPriceRange(newValue);
-    if (onPriceChange) {
-      onPriceChange(newValue);
-    }
+    console.log("Price range updated:", newValue);
   };
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
+    console.log("Size selected:", size);
   };
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
+    console.log("Color selected:", color);
+  };
+
+  const handleSearchClick = () => {
+    const selectedFilters = {
+      price: priceRange.join(","), // Convert array to string
+      size: selectedSize,
+      color: selectedColor,
+    };
+
+    console.log("Filters applied:", selectedFilters);
+
+    // Notify parent component of the updated filters
+    if (onFilterChange) {
+      onFilterChange(selectedFilters);
+    }
   };
 
   const sizes = [6, 7, 8, 9, 10, 11, 12, 6.5, 7.5, 8.5, 9.5, 10.5];
-  const colors = ["black", "white", "blue", "green", "gray"];
+  const colors = ["Black", "White", "Blue", "Green", "Grey"];
 
   const DrawerList = (
     <Box
@@ -66,6 +82,7 @@ export default function TemporaryDrawer({ onPriceChange }) {
               },
             }}
             onClick={() => handleSizeSelect(size)}
+            aria-label={`Size ${size}`}
           >
             {size}
           </Grid>
@@ -90,8 +107,7 @@ export default function TemporaryDrawer({ onPriceChange }) {
               height: "30px",
               borderRadius: "50%",
               backgroundColor: color,
-              
-              border: "1px solid black",
+              border: selectedColor === color ? "3px solid #2e57df" : "1px solid black",
               cursor: "pointer",
               transition: "all 0.3s ease-in-out",
               "&:hover": {
@@ -99,6 +115,7 @@ export default function TemporaryDrawer({ onPriceChange }) {
               },
             }}
             onClick={() => handleColorSelect(color)}
+            aria-label={`Color ${color}`}
           ></Box>
         ))}
       </Box>
@@ -122,14 +139,31 @@ export default function TemporaryDrawer({ onPriceChange }) {
       <p style={{ textAlign: "center", fontSize: "14px", marginTop: "5px" }}>
         Selected Range: ₹{priceRange[0]} - ₹{priceRange[1]}
       </p>
+
+      {/* Search Button */}
+      <Button
+        onClick={handleSearchClick}
+        sx={{
+          width: "100%",
+          backgroundColor: "#2e57df",
+          color: "#fff",
+          padding: "10px",
+          fontWeight: "bold",
+          "&:hover": {
+            backgroundColor: "#1d3a75",
+          },
+        }}
+        aria-label="Search Filters"
+      >
+        Search
+      </Button>
     </Box>
   );
 
   return (
-    <div>
-      <Button onClick={toggleDrawer(true)}>
-        {/* Replace the icon with text */}
-        <span style={{ fontSize: "15px", color: "black", fontWeight: "normal", padding: "5px" }}>Filter & Sort</span>
+    <div className="filter-sidebar">
+      <Button onClick={toggleDrawer(true)} aria-label="Open Filters">
+        {open ? "Close Filters" : "Open Filters"}
       </Button>
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
