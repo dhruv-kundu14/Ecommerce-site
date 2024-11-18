@@ -11,29 +11,30 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import CartDetail from "./CartDetail"; // Your cart sidebar component
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../server/AuthContext";
 
 const pages = [
   { name: "Home", link: "/" },
-  { name: "Product Listing", link: "/products" },
+  { name: "Product List", link: "/products" },
   { name: "Pricing", link: "/pricing" },
-  { name: "Products", link: "/productlisting" },
+  { name: "Products", link: "/ProductListing" },
 ];
 const guestPages = [{ name: "Home", link: "/" }];
-
 const settingsLoggedIn = [
   { name: "Profile", link: "/UserProfile" },
   { name: "Account", link: "/Account" },
-  { name: "Dashboard", link: "/Dashboard" },
   "Logout",
 ];
 const settingsLoggedOut = ["Login"];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({ cartCount = 0, cartItems = [] }) {
   const { isAuthenticated, logout } = useAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [isCartSidebarOpen, setCartSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
@@ -41,181 +42,149 @@ function ResponsiveAppBar() {
   const handleCloseNavMenu = () => setAnchorElNav(null);
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
   const handleUserMenuClick = (setting) => {
-    switch (setting) {
-      case "Logout":
-        handleLogout();
-        break;
-      case "Login":
-        navigate("/user");
-        break;
-      default:
-        navigate(setting.link || "/");
+    if (setting === "Logout") {
+      logout();
+      navigate("/");
+    } else if (setting === "Login") {
+      navigate("/user");
+    } else {
+      navigate(setting.link || "/");
     }
     handleCloseUserMenu();
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <img
-            src="/icons/shopping-bag.png"
-            alt="Shopping bag icon"
-            style={{
-              width: "40px",
-              height: "40px",
-              marginRight: "8px",
-              objectFit: "contain",
-              cursor: "pointer",
-              transition: "transform 0.2s",
-            }}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.transform = "scale(1.1)")
-            }
-            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            {/* DK */}
-          </Typography>
+    <>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            {/* Logo */}
+            <img
+              src="/icons/shopping-bag.png"
+              alt="Shopping Bag"
+              style={{ width: 40, marginRight: 10, cursor: "pointer" }}
+            />
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-              keepMounted
-              transformOrigin={{ vertical: "top", horizontal: "left" }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: "block", md: "none" } }}
-            >
-              {(isAuthenticated ? pages : guestPages).map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <NavLink
-                    to={page.link}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <Typography sx={{ textAlign: "center" }}>
-                      {page.name}
-                    </Typography>
-                  </NavLink>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {(isAuthenticated ? pages : guestPages).map((page) => (
-              <NavLink
-                key={page.name}
-                to={page.link}
-                style={({ isActive }) => ({
-                  textDecoration: "none",
-                  color: isActive ? "yellow" : "white",
-                  fontWeight: isActive ? "bold" : "normal",
-                })}
-              >
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page.name}
-                </Button>
-              </NavLink>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
-                onClick={
-                  isAuthenticated ? handleOpenUserMenu : () => navigate("/user")
-                }
-                sx={{ p: 0 }}
+                size="large"
+                aria-label="menu"
+                onClick={handleOpenNavMenu}
+                color="inherit"
               >
-                {" "}
-                {isAuthenticated ? (
-                  <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
-                ) : (
-                  <img
-                    src="icons/login.png"
-                    style={{
-                      width: "70px",
-                      height: "70px",
-                      marginRight: "8px",
-                      objectFit: "contain",
-                      cursor: "pointer",
-                      transition: "transform 0.2s",
-                    }}
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.transform = "scale(1.1)")
-                    }
-                    onMouseOut={(e) =>
-                      (e.currentTarget.style.transform = "scale(1)")
-                    }
-                    alt="Login Icon"
-                  />
-                )}
+                <MenuIcon />
               </IconButton>
-            </Tooltip>
+              <Menu
+                anchorEl={anchorElNav}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+              >
+                {(isAuthenticated ? pages : guestPages).map((page) => (
+                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                    <NavLink
+                      to={page.link}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <Typography>{page.name}</Typography>
+                    </NavLink>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
 
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-              keepMounted
-              transformOrigin={{ vertical: "top", horizontal: "right" }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {(isAuthenticated ? settingsLoggedIn : settingsLoggedOut).map(
-                (setting) => (
+            {/* Pages */}
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              {(isAuthenticated ? pages : guestPages).map((page) => (
+                <NavLink
+                  key={page.name}
+                  to={page.link}
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    marginRight: "10px",
+                  }}
+                >
+                  <Button color="inherit">{page.name}</Button>
+                </NavLink>
+              ))}
+            </Box>
+
+            {/* User Menu */}
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton
+                  onClick={
+                    isAuthenticated
+                      ? handleOpenUserMenu
+                      : () => navigate("/user")
+                  }
+                  sx={{ p: 0 }}
+                >
+                  {isAuthenticated ? (
+                    <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
+                  ) : (
+                    <img
+                      src="/icons/login.png"
+                      alt="Login Icon"
+                      style={{ width: 40 }}
+                    />
+                  )}
+                </IconButton>
+              </Tooltip>
+              <Menu
+                anchorEl={anchorElUser}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {(isAuthenticated
+                  ? settingsLoggedIn
+                  : settingsLoggedOut
+                ).map((setting) => (
                   <MenuItem
                     key={setting.name || setting}
                     onClick={() => handleUserMenuClick(setting)}
                   >
-                    <Typography sx={{ textAlign: "center" }}>
-                      {setting.name || setting}
-                    </Typography>
+                    <Typography>{setting.name || setting}</Typography>
                   </MenuItem>
-                )
+                ))}
+              </Menu>
+            </Box>
+
+            {/* Cart Icon */}
+            <IconButton
+              onClick={() => setCartSidebarOpen(true)}
+              style={{ position: "relative", marginLeft: "10px" }}
+            >
+              <ShoppingBagIcon style={{ color: "white" }} />
+              {cartCount > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                    backgroundColor: "red",
+                    borderRadius: "50%",
+                    padding: "2px 8px",
+                    color: "white",
+                    fontSize: "12px",
+                  }}
+                >
+                  {cartCount}
+                </span>
               )}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            </IconButton>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      {/* Cart Sidebar */}
+      <CartDetail
+       cartItems={cartItems}
+        open={isCartSidebarOpen}
+        onClose={() => setCartSidebarOpen(false)}
+      />
+    </>
   );
 }
 

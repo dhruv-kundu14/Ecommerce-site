@@ -46,7 +46,7 @@ export default function TemporaryDrawer({ onFilterChange }) {
     }
   };
 
-  const sizes = [6, 7, 8, 9, 10, 11, 12, 6.5, 7.5, 8.5, 9.5, 10.5];
+  const sizes = [6, 7, 8, 9, 10, 11, 12];
   const colors = ["Black", "White", "Blue", "Green", "Grey"];
 
   const DrawerList = (
@@ -163,7 +163,7 @@ export default function TemporaryDrawer({ onFilterChange }) {
   return (
     <div className="filter-sidebar">
       <Button onClick={toggleDrawer(true)} aria-label="Open Filters">
-        {open ? "Close Filters" : "Open Filters"}
+        {open ? "Close Filters" : "Filter & Sort"}
       </Button>
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
