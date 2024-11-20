@@ -27,10 +27,15 @@ const ProductList = ({ addToCart, filters }) => {
     
         console.log('Query String:', queryString);
     
+        // const endpoint = queryString
+        //   ? `http://localhost:5003/api/products?${queryString}`
+        //   : 'http://localhost:5002/getProducts'; // Fallback endpoint if no filters
+   
         const endpoint = queryString
-          ? `http://localhost:5003/api/products?${queryString}`
-          : 'http://localhost:5002/getProducts'; // Fallback endpoint if no filters
-    
+          ? `https://ecommerce-backend-59dz.onrender.com/common-backend/fetchProducts?${queryString}`
+          : 'https://ecommerce-backend-59dz.onrender.com/common-backend/getProducts'; // Fallback endpoint if no filters
+   
+
         const response = await axios.get(endpoint);
     
         // Ensure response is an array

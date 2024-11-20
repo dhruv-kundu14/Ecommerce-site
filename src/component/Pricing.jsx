@@ -48,8 +48,9 @@ const Pricing = () => {
 
     try {
       // Send the product data to the backend
-      const response = await axios.post('http://localhost:5002/enterProducts', formData, {
-        headers: {
+      // const response = await axios.post('http://localhost:5002/enterProducts', formData, {
+        const response = await axios.post('https://ecommerce-backend-59dz.onrender.com/common-backend/enterProducts', formData, {
+           headers: {
           'Content-Type': 'multipart/form-data', // Important for file uploads
         },
       });

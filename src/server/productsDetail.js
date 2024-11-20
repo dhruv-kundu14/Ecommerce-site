@@ -101,23 +101,23 @@ MongoConnection()
       }
     });
 
-    app.get('/getFilteredProducts', (req, res) => {
-      const { price, size, color } = req.query;
-      const filterConditions = {};
+    // app.get('/getFilteredProducts', (req, res) => {
+    //   const { price, size, color } = req.query;
+    //   const filterConditions = {};
     
-      if (price) {
-        const [minPrice, maxPrice] = price.split(',').map(Number);
-        filterConditions.price = { $gte: minPrice, $lte: maxPrice };
-      }
+    //   if (price) {
+    //     const [minPrice, maxPrice] = price.split(',').map(Number);
+    //     filterConditions.price = { $gte: minPrice, $lte: maxPrice };
+    //   }
     
-      if (size) filterConditions.size = size;
-      if (color) filterConditions.color = color;
+    //   if (size) filterConditions.size = size;
+    //   if (color) filterConditions.color = color;
     
-      // Fetch products from the database based on filterConditions
-      Product.find(filterConditions)
-        .then((products) => res.json(products))
-        .catch((error) => res.status(500).json({ error: 'Failed to load products' }));
-    });
+    //   // Fetch products from the database based on filterConditions
+    //   Product.find(filterConditions)
+    //     .then((products) => res.json(products))
+    //     .catch((error) => res.status(500).json({ error: 'Failed to load products' }));
+    // });
     
     
 

@@ -24,7 +24,9 @@ const RegistrationForm = () => {
     console.log('Form Data:', formData);
 
     try{
-      const response = await axios.post('http://localhost:5000/api/register', formData);
+      // const response = await axios.post('http://localhost:5000/api/register', formData);
+      const response = await axios.post('https://ecommerce-backend-59dz.onrender.com/common-backend/api/registerForm', formData);
+
       console.log("Response",response.data);
       alert("user has been registered");
     }catch(error){
