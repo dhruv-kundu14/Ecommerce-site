@@ -14,55 +14,55 @@ import {
 
 const HomePage = ({ addToCart }) => {
   const products = [
-    { id: 1, name: "Bagpack", price: "₹ 9500", image: "/icons/product1.jpg" },
+    { id: 1, name: "Bagpack", price: "₹ 9500", image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/product1.jpg" },
     {
       id: 2,
       name: "Adidas Light",
       price: "₹ 12565",
-      image: "/icons/product2.jpg",
+      image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/product2.jpg",
     },
     {
       id: 3,
       name: "Cartoon Astronaut T-Shirt",
       price: "₹ 12565",
-      image: "/icons/product3.jpg",
+      image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/product3.jpg",
     },
     {
       id: 4,
       name: "Cartoon Astronaut T-Shirt",
       price: "₹ 12565",
-      image: "/icons/product4.jpg",
+      image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/product4.jpg",
     },
     {
       id: 5,
       name: "Cartoon Astronaut T-Shirt",
       price: "₹ 12565",
-      image: "/icons/product5.jpg",
+      image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/product5.jpg",
     },
     {
       id: 6,
       name: "Cartoon Astronaut T-Shirt",
       price: "₹ 12565",
-      image: "/icons/product6.jpg",
+      image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/product6.jpg",
     },
     {
       id: 7,
       name: "Cartoon Astronaut T-Shirt",
       price: "₹ 12565",
-      image: "/icons/product7.jpg",
+      image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/product7.jpg",
     },
     {
       id: 8,
       name: "Cartoon Astronaut T-Shirt",
       price: "₹ 12565",
-      image: "/icons/product8.jpg",
+      image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/product8.jpg",
     },
   ];
 
   const carouselItems = [
-    { id: 1, image: "/icons/banner/b1.jpg", caption: "Limited Time Offer" },
-    { id: 2, image: "/icons/banner/b16.jpg", caption: "Best Sellers" },
-    { id: 3, image: "/icons/banner/b20.jpg", caption: "New Arrivals" },
+    { id: 1, image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/banner/b1.jpg", caption: "Limited Time Offer" },
+    { id: 2, image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/banner/b16.jpg", caption: "Best Sellers" },
+    { id: 3, image: "https://dhruv-kundu14.github.io/Ecommerce-site/icons/banner/b20.jpg", caption: "New Arrivals" },
   ];
 
   const reviews = [
@@ -71,21 +71,21 @@ const HomePage = ({ addToCart }) => {
       name: "John Doe",
       rating: 4,
       review: "Great product! Highly recommend it. The quality is top-notch.",
-      icon: <img src="/icons/people/1.png" alt="John Doe" className="review-icon" />
+      icon: <img src="https://dhruv-kundu14.github.io/Ecommerce-site/icons/people/1.png" alt="John Doe" className="review-icon" />
     },
     {
       id: 2,
       name: "Jane Smith",
       rating: 5,
       review: "Absolutely love it! Fast delivery and excellent customer service.",
-      icon: <img src="/icons/people/3.png" alt="Jane Smith" className="review-icon" />
+      icon: <img src="https://dhruv-kundu14.github.io/Ecommerce-site/icons/people/3.png" alt="Jane Smith" className="review-icon" />
     },
     {
       id: 3,
       name: "Michael Johnson",
       rating: 3,
       review: "Decent product, but could be improved. Overall, it's okay.",
-      icon: <img src="/icons/people/2.png" alt="Michael Johnson" className="review-icon" />
+      icon: <img src="https://dhruv-kundu14.github.io/Ecommerce-site/icons/people/2.png" alt="Michael Johnson" className="review-icon" />
     },
   ];
 
@@ -148,7 +148,7 @@ const HomePage = ({ addToCart }) => {
     <div className="home-page">
       {/* Hero Section */}
       <div className="hero">
-        <img src="/hero-section.jpg" alt="" />
+        <img src="https://dhruv-kundu14.github.io/Ecommerce-site/hero-section.jpg" alt="" />
         <div className="hero-content">
           <h2>Super value Deals</h2>
           <h3>On all Products</h3>

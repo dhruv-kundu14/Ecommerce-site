@@ -17,12 +17,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../server/AuthContext";
 
 const pages = [
-  { name: "Home", link: "/" },
+  { name: "Home", link: "/Ecommerce-site" },
   { name: "Product List", link: "/products" },
   { name: "Pricing", link: "/pricing" },
   { name: "Products", link: "/ProductListing" },
 ];
-const guestPages = [{ name: "Home", link: "/" }];
+const guestPages = [{ name: "Home", link: "/Ecommerce-site" }];
 const settingsLoggedIn = [
   { name: "Profile", link: "/UserProfile" },
   { name: "Account", link: "/Account" },
@@ -61,7 +61,7 @@ function ResponsiveAppBar({ cartCount = 0, cartItems = [] }) {
           <Toolbar disableGutters>
             {/* Logo */}
             <img
-              src="/icons/shopping-bag.png"
+              src="https://dhruv-kundu14.github.io/Ecommerce-site/icons/shopping-bag.png"
               alt="Shopping Bag"
               style={{ width: 40, marginRight: 10, cursor: "pointer" }}
             />
@@ -125,7 +125,7 @@ function ResponsiveAppBar({ cartCount = 0, cartItems = [] }) {
                     <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
                   ) : (
                     <img
-                      src="/icons/login.png"
+                      src="https://dhruv-kundu14.github.io/Ecommerce-site/icons/login.png"
                       alt="Login Icon"
                       style={{ width: 40 }}
                     />
