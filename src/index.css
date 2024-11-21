@@ -11,3 +11,1060 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and HTML Styles */
+body, html {
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  height: 100%; /* Full height */
+  font-family: Arial, sans-serif; /* Default font */
+}
+
+/* App Container Styles */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full height of the viewport */
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2b2b2b;
+  padding: 10px 20px;
+  color: white;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.navbar-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 20px;
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li {
+  cursor: pointer;
+  font-size: 16px;
+  color: white; /* Set text color to white */
+}
+
+.nav-links li a {
+  text-decoration: none; /* Remove underline */
+  color: white; /* Set link color to white */
+}
+
+.nav-links li a:hover {
+  color: #bbb; /* Optional: Change color on hover */
+}
+
+.nav-links .active {
+  font-weight: bold;
+  border-bottom: 2px solid white; /* Optional: Underline for active links */
+}
+
+.search-bar {
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background-color: #444;
+  color: white;
+  outline: none;
+  margin-right: 20px;
+}
+
+.search-bar::placeholder {
+  color: #bbb;
+}
+
+.avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+/* Login Form Styles */
+.login {
+  width: 500px;
+  margin: 15px 50px 0 auto;   /* Top margin, Right margin, Bottom margin, Left margin */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: transparent;
+  box-shadow: 15px 10px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 280;
+  
+}
+
+.login-container {
+  background-image: url('/public/icons/blog/eshop_img.webp'); /* Replace with your image URL or path */
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents tiling */
+  height: 100vh; /* Full viewport height */
+  display: flex; /* Enables flexbox for centering the login box */
+  justify-content: flex-end; /* Pushes the login box to the right */
+  align-items: center; /* Vertically centers the login box */
+  padding: 20px; /* Optional: adds some spacing inside the container */
+}
+
+.login h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.label {
+  font-size: 20px;     
+  color: #333;          
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-input label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+  text-align: left;   /* Align the label text to the left */
+  display: block;
+}
+
+.login-input input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-btn {
+  margin-top: 20px;
+}
+
+.login-btn button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-btn button:hover {
+  background-color: #45a049;
+}
+
+.login-input input:hover {
+  border-color: #888;
+}
+
+/* Register Button Styles */
+.register-btn {
+  margin-top: 20px; 
+  text-align: right;
+}
+
+.register-btn button {
+  padding: 5px 15px;
+  background-color: #49535d; /* Blue color for Register button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.register-btn button:hover {
+  background-color: #485461; /* Darker blue when hovered */
+}
+
+/* Home Page Styles */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Allow home page to take available space */
+}
+
+.hero {
+  display: flex;
+  justify-content: flex-start; /* Align content to the left */
+  align-items: center; /* Center vertically */
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.hero img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Ensure the image stays in the background */
+}
+
+.hero-content {
+  position: relative;
+  text-align: left; /* Align text to the left */
+  padding: 20px; /* Add padding for spacing */
+  max-width: 800px; /* Limit the width for better readability */
+  color: #ffffff;
+  margin-left: 5%; /* Add some space from the left edge */
+}
+
+.hero h2 {
+  font-size: 5vw;
+}
+
+.hero h3 {
+  font-size: 4vw;
+  margin-left: 85px;
+  color: #322f2f
+}
+
+.hero p {
+  font-size: 2vw;
+  /* margin-right: 343px; */
+  color: #5c5050;
+}
+
+@media (max-width: 768px) {
+  .hero h2 {
+    font-size: 8vw;
+  }
+  
+  .hero h3 {
+    font-size: 6vw;
+  }
+
+  .hero p {
+    font-size: 4vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h2 {
+    font-size: 10vw;
+  }
+
+  .hero h3 {
+    font-size: 8vw;
+  }
+
+  .hero p {
+    font-size: 6vw;
+  }
+}
+
+
+
+.hero button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #515f6d;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Product List Styles */
+.product-list {
+  padding: 0px 50px; /* Added vertical padding for better spacing */
+}
+
+.product-list h3 {
+  font-size: 24px;
+  margin: 10px 0;
+  text-align: center;
+  color: #333;
+}
+
+/* Products Grid */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted for responsive design */
+  gap: 20px; /* Consistent spacing between product cards */
+  justify-content: center; /* Centered products when fewer items are present */
+}
+
+/* Individual Product Card */
+.product-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  width: 280px;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Product Image Container */
+.product-image {
+  height: 200px; /* Adjust height based on your layout preference */
+  overflow: hidden; /* Prevent the image from overflowing the container */
+  display: flex; /* Center the image horizontally and vertically */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Product Image */
+.product-image img {
+  width: 100%; /* Make the image take the full width of the container */
+  height: 100%; /* Ensure it fits the height */
+  object-fit: contain; /* Maintain aspect ratio without cropping or zooming */
+  display: block; /* Eliminate inline spacing issues */
+}
+
+
+/* Product Details */
+.product-details {
+  display: flex; /* Enable Flexbox for alignment */
+  flex-direction: column; /* Stack child elements vertically */
+  align-items: center; /* Center elements horizontally */
+  justify-content: space-between; /* Add spacing between elements */
+  padding: 15px;
+  height: 150px; /* Fixed height to ensure consistent layout */
+  text-align: center;
+}
+
+.product-details h4 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.product-details p {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0 15px;
+}
+
+/* Add to Cart Button */
+button {
+  margin-top: auto; /* Push the button to the bottom if space allows */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: #3f4853;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+button:disabled {
+  background: #9a8888;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background: #e2e5e8;
+  margin-top: 15px;
+  transform: translateY(-2px);
+}
+
+
+/* Spinner styling */
+.spinner {
+  margin: 50px auto;
+  border: 4px solid #ddd;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #282c34;
+  color: white;
+}
+
+.registration-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 50px auto;
+  border-radius: 10px;
+  text-align: center;
+  height: 400px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  flex-basis: 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #007bff;
+}
+
+.address-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.address-input {
+  flex-grow: 1;
+}
+
+.fetch-address-btn {
+  width: 120px;
+  margin-left: 10px;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.fetch-address-btn:hover {
+  background-color: #0056b3;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+p a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #a1a1a3; /* Light background color */
+  padding: 40px 20px; /* Spacing inside the footer */
+  text-align: center; /* Center-align text for small screens */
+  color: #333; /* Dark text color */
+  font-size: 14px; /* Default font size */
+}
+
+.footer p {
+  margin: 0;
+  padding: 10px 0;
+  color: #666;
+}
+
+.footer .social {
+  list-style-type: none; /* Remove bullets from the list */
+  padding: 0;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center; /* Center the icons */
+  gap: 20px; /* Add space between icons */
+}
+
+.footer .social li a {
+  color: #333;
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer .social li a:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+.footer .info {
+  display: flex;
+  justify-content: space-evenly; /* Space between the info columns */
+  flex-wrap: wrap; /* Ensure responsiveness on smaller screens */
+  gap: 30px; /* Space between each column */
+  /* padding: 20px 0; */
+}
+
+.footer .info ul {
+  list-style-type: none; /* Remove list bullets */
+  padding: 0;
+}
+
+.footer .footer-list_header {
+  font-weight: bold;
+  margin-bottom: 13px;
+  color: #010101;
+  font-size: 25px;
+}
+
+.footer .info ul li a {
+  color: #666;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.footer .info ul li a:hover {
+  color: #007bff; /* Highlight links on hover */
+}
+
+@media (max-width: 768px) {
+  /* Adjust layout for smaller screens */
+  .footer .info {
+    flex-direction: column; /* Stack the columns */
+    text-align: left; /* Align text to the left */
+  }
+}
+
+.add-product-form {
+  max-width: 700px; /* Set a maximum width for the form */
+  margin: 50px auto; /* Center the form horizontally */
+  padding: 20px; /* Add padding around the form */
+  border: 1px solid #ccc; /* Light border around the form */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for some depth */
+}
+
+.add-product-form h2 {
+  text-align: center; /* Center the title */
+  margin-bottom: 20px; /* Add some space below the title */
+  font-size: 1.8em; /* Make the font larger */
+  color: #333; /* Darker text color for the title */
+}
+
+.add-product-form label {
+  display: block; /* Ensure labels take up the full width */
+  margin-bottom: 8px; /* Add space between the label and input */
+  font-weight: bold; /* Make the label bold */
+  color: #555; /* Slightly darker label color */
+}
+
+.add-product-form input[type="text"],
+.add-product-form input[type="number"],
+.add-product-form textarea {
+  width: 100%; /* Make the inputs take up the full width */
+  padding: 10px; /* Add padding inside the input */
+  margin-bottom: 20px; /* Space between inputs */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 1em; /* Increase font size for readability */
+  box-sizing: border-box; /* Ensure padding doesn't affect the width */
+}
+
+.add-product-form textarea {
+  resize: vertical; /* Allow users to resize the textarea vertically */
+  height: 100px; /* Set a fixed height for the textarea */
+}
+
+.add-product-form button {
+  width: 100%; /* Full width button */
+  padding: 12px; /* Add padding inside the button */
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove default borders */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 1.1em; /* Slightly larger text */
+  cursor: pointer; /* Add a pointer cursor */
+}
+
+.add-product-form button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.css-hhdjsd-MuiContainer-root {
+  background-color: darkgrey;
+}
+
+.modal-overlay {
+  position: absolute; /* Change from fixed to absolute */
+  top: 100%; /* Position below the avatar */
+  left: 0;
+  right: 70px;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  width: 250px; /* Adjust as needed */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content button {
+  margin-top: 10px;
+}
+
+
+/* Carousel Container */
+/* .carousel {
+  width: 90%; 
+  margin: 40px auto; 
+  overflow: hidden; 
+  border-radius: 20px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+} */
+
+.carousel {
+  width: 97%;
+  margin: 18px auto;
+  overflow: hidden;
+  border-radius: 230px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Default Styles for Carousel Images */
+.carousel .carousel-img {
+  height: 380px; /* Fixed height */
+  object-fit: cover; /* Ensures the image covers the container, cropping if needed */
+  width: 100%; /* Make width 100% to fit the container */
+  border-radius: 20px; /* Ensures image matches container's rounded corners */
+}
+
+/* Carousel Captions */
+.carousel .carousel-caption {
+  background: rgba(0, 0, 0, 0.6); /* Darker background for better contrast */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding around text */
+  border-radius: 10px; /* Rounded corners for captions */
+  font-size: 1.2rem; /* Adjust font size as needed */
+  text-align: center; /* Center text */
+  width: 60%; /* Ensures captions are not too wide */
+  margin: 0 auto; /* Center the captions */
+}
+
+/* Dynamic Styles for Smaller Screens */
+@media (max-width: 768px) {
+  .carousel .carousel-img {
+    height: 300px; /* Reduce height for smaller screens */
+    border-radius: 10px; /* Smaller rounded corners */
+  }
+
+  .carousel .carousel-caption {
+    font-size: 1rem; /* Reduce font size for captions */
+    padding: 8px 16px; /* Reduce padding */
+    width: 80%; /* Make caption more responsive */
+  }
+}
+
+/* Extra Small Screens (Mobile) */
+@media (max-width: 480px) {
+  .carousel .carousel-img {
+    height: 200px; /* Smaller height for mobile */
+  }
+
+  .carousel .carousel-caption {
+    font-size: 0.9rem; /* Even smaller font size for mobile */
+  }
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+.profile-section {
+  background-color: #f4f5f7;
+}
+
+.profile-card {
+  border-radius: 0.5rem;
+}
+
+.profile-image-section {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.profile-avatar {
+  width: 80px;
+  border-radius: 50%;
+}
+
+.profile-card h5, .profile-card p {
+  margin-bottom: 0;
+}
+
+.social-icon {
+  color: #3b5998; /* Facebook Blue */
+  margin-right: 15px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #1d72b8; /* Lighter Blue for hover */
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .profile-image-section {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .profile-card {
+    border-radius: 0.5rem;
+  }
+}
+.customer-reviews {
+  padding: 40px 20px; /* Adjusted padding for better spacing */
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.reviews {
+  display: flex;
+  flex-wrap: wrap; /* Ensures cards wrap on smaller screens */
+  justify-content: center; /* Centers the review cards */
+  align-items: flex-start;
+  gap: 20px; /* Adds space between cards */
+  margin: 0 auto;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-start;
+  gap: 15px; 
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin: 10px ;
+  max-width: 500px;
+  text-align: left;
+}
+
+.review-icon {
+  width: 60px; /* Ensures consistent size */
+  height: 60px;
+  margin-left: 20px;
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover;
+  border: 2px solid #e0e0e0; /* Optional border for styling */
+}
+
+.review-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Adds spacing between lines */
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Adjust spacing between name and stars */
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 10px; /* Adds spacing if items wrap */
+}
+
+.review-info {
+  font-weight: bold; /* Name styling */
+  font-size: 1.1em;
+}
+
+.stars {
+  color: #ffd700;
+  font-size: 1.2em; /* Larger stars for clarity */
+}
+
+.review-text {
+  font-size: 0.95em;
+  line-height: 1.5; /* Improves readability of the review text */
+}
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: normal;
+  margin-bottom: 2px;
+  margin-top: 10px;
+}
+
+.sidebar-items {
+  margin-top: 20px;
+}
+
+.sidebar-label-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin: 15px 50px 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sidebar-label-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: var(--checkmark-bg, #eee);
+  border-radius: 50%;
+}
+
+.sidebar-label-container:hover input ~ .checkmark {
+  background-color: var(--checkmark-hover-bg, #ccc);
+}
+
+.sidebar-label-container input:checked ~ .checkmark {
+  background-color: var(--checkmark-selected-bg, #2e57df);
+}
+
+.sidebar-label-container input:focus ~ .checkmark {
+  box-shadow: 0 0 3px var(--checkmark-selected-bg, #2e57df);
+}
+
+.checkmark::after{
+  content:"";
+  position: absolute;
+  display: none;
+}
+
+.sidebar-label-container input:checked ~ .checkmark::after {
+display: block;
+}
+
+.sidebar-label-container .checkmark::after{
+  top: 6.4px;
+  left: 6.4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: white;
+}
+
+.slider-price{
+  width: 50%;
+}
+#cart-icon {
+  position: relative;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.cart {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 360px;
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--bg-color);
+  box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
+  transition: 0.3s;
+}
+
+.cart.active {
+  right: 0;
+}
+
+.cart-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.cart-box {
+  display: grid;
+  grid-template-columns: 32% 50% 18%;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cart-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.detail-box {
+  display: grid;
+  row-gap: 0.5rem;
+}
+
+.cart-product-title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.cart-price {
+  font-weight: 500;
+}
+
+.cart-quantity {
+  border: 1px solid var(--text-color);
+  outline-color: var(--main-color);
+  width: 2.4rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.cart-remove {
+  font-size: 24px;
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.btn-buy {
+  background: var(--main-color);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+.btn-buy:hover {
+  background: var(--main-color-dark);
+}
