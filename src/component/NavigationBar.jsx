@@ -49,7 +49,7 @@ function ResponsiveAppBar({ cartCount = 0, cartItems = [] }) {
     } else if (setting === "Login") {
       navigate("/user");
     } else {
-      navigate(setting.link || "/");
+      navigate(setting.link || "/Ecommerce-site");
     }
     handleCloseUserMenu();
   };
