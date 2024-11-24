@@ -45,7 +45,7 @@ function ResponsiveAppBar({ cartCount = 0, cartItems = [] }) {
   const handleUserMenuClick = (setting) => {
     if (setting === "Logout") {
       logout();
-      navigate("/");
+      navigate("/Ecommerce-site");
     } else if (setting === "Login") {
       navigate("/user");
     } else {
