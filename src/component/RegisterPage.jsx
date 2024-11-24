@@ -98,6 +98,7 @@
 // export default RegistrationForm;
 
 
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import MapModal from './MapModal';
@@ -111,6 +112,7 @@ const RegistrationForm = () => {
     gender: '',
     phoneNumber: '',
     address: '',
+    addresspoint: '', // Address from the map
   });
 
   const handleChange = (e) => {
@@ -120,8 +122,13 @@ const RegistrationForm = () => {
     });
   };
 
+  const handleAddressSelect = (selectedAddress) => {
+    setFormData((prev) => ({ ...prev, addresspoint: selectedAddress }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log('Form Data:', formData);
 
     try {
@@ -129,16 +136,12 @@ const RegistrationForm = () => {
         'https://ecommerce-backend-59dz.onrender.com/common-backend/api/registerForm',
         formData
       );
-      console.log('Response', response.data);
-      alert('User has been registered');
+      console.log('Response:', response.data);
+      alert('User has been registered successfully');
     } catch (error) {
-      console.error('Error in registration', error);
-      alert('Failed to register user');
+      console.error('Error in registration:', error.response || error);
+      alert('Failed to register user. Please try again.');
     }
-  };
-
-  const handleAddressSelect = (selectedAddress) => {
-    setFormData({ ...formData, address: selectedAddress });
   };
 
   return (
@@ -232,13 +235,11 @@ const RegistrationForm = () => {
             placeholder="Enter your address"
           />
         </div>
-        <button type="button" className="fetch-address-btn">
-          Fetch Address
-        </button>
       </div>
 
-      {/* Map is now always visible below */}
-      <MapModal onSelect={handleAddressSelect} />
+      {/* Embedded MapModal for Address Selection */}
+      <MapModal onSelect={(selectedAddress) => setFormData((prev) => ({ ...prev, addresspoint: selectedAddress }))} />
+
 
       <button type="submit" className="submit-btn">
         Sign up
